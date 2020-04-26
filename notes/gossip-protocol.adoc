@@ -1,0 +1,22 @@
+link:https://www.consul.io/docs/internals/gossip.html[]
+
+consulはgossip protocolを使ってる
+
+== Gossip Protocol
+
+Serfで使われているGossip protocolはSWIM(Scalable Weakly-consistent Infection-style Process Group Membership Protocol) ベースに、ちょろっと変更したやつ
+
+
+link:https://medium.com/radix-japan-unofficial/primer-on-gossip-protocol-6377c3316b50[Primer on Gossip Protocol - ゴシッププロトコル入門]
+
+> ゴシッププロトコルの性質上、すべてのノードは常に異なるイベントを認識することになりますが、情報交換はすべてのノードに何が起こったのかを認識させるまで続きます。一連の受け入れられたイベントとして収束するには、一定の時間が必要となります。
+
+すべてのノードに何が起こったのかを認識させたかどうかの判断はどうやってするのか？
+
+link:https://www.youtube.com/watch?v=7miIhilboaU[Youtube ２：ゴシッププロトコルとは？]
+
+これがわかりやすかった
+
+イベントに自分が知ってるよという情報を埋め込む
+
+Aから発信されたBに発信された状態では、Bは「Aは知っている」「Bは知っている」という情報を持っているが、Aは「Aが知っている」という情報のみというところがミソかもしれぬ
